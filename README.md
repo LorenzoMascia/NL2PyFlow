@@ -24,7 +24,7 @@
 
 ## Overview
 
-NL2PyFlow enables users to author discrete, descriptive blocks in plain English. An LLM interprets each block and generates corresponding Python functions. An orchestrator then dynamically loads and executes these functions in sequence, sharing data via a unified `context` dictionary.
+NL2PyFlow enables users to author discrete, descriptive blocks in plain English or any other language. An LLM interprets each block and generates corresponding Python functions. An orchestrator then dynamically loads and executes these functions in sequence, sharing data via a unified `context` dictionary.
 
 ## Goals
 
