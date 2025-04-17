@@ -1,0 +1,21 @@
+[project]
+name = "NL2PyFlow"
+version = "0.1.0"
+description = "A pipeline that converts high level natural language blocks into executable Python functions, chained together with a shared context"
+authors = [
+    { name="Lorenzo Mascia", email="lorenzo.mascia@gmail.com" }
+]
+dependencies = [
+    
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "flake8"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
