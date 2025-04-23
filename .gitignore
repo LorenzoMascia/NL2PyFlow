@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# Logs and local debug stuff
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Test outputs
+htmlcov/
+coverage.xml
+.tox/
+.pytest_cache/
+
+# MyPy, Pyre, etc.
+.mypy_cache/
+.pyre/
+
+# VS Code
+.vscode/
+
+# macOS, Linux, Windows system files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+
+# IDEs and project configs
+.idea/
+*.iml
+
+# Compiled Cython files
+*.so

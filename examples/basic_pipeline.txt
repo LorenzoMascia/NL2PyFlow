@@ -1,0 +1,8 @@
+### Block 1: Load data
+Load CSV "sales.csv" into a list of records.
+
+### Block 2: Filter high-value
+Filter records with amount > 1000.
+
+### Block 3: Compute total
+Sum all amounts and store in context["total_sales"].
