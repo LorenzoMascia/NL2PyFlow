@@ -184,5 +184,5 @@ Contributions, issues, and feature requests are welcome! Please follow these ste
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [Apache License 2.0](LICENSE).
 
