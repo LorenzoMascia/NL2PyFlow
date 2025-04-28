@@ -6,6 +6,7 @@ Filter records with amount > 1000.
 
 ### Block 3: Compute total
 Sum all amounts and store in context["total_sales"].
+<<<<<<< HEAD
 
 
 most complex:
@@ -31,3 +32,5 @@ Calculate the average amount per sale and store it in context["average_sale"].
 ### Block 7: Export filtered data
 Save the filtered high-value records into a new CSV file called "high_value_sales.csv".
 
+=======
+>>>>>>> 0509bdd4d0034982a37bcaad665da08b797558b4
