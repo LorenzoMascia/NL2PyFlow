@@ -184,9 +184,6 @@ Contributions, issues, and feature requests are welcome! Please follow these ste
 
 ## License
 
-<<<<<<< HEAD
-This project is licensed under the [MIT License](LICENSE).
-=======
 This project is licensed under the [Apache License 2.0](LICENSE).
->>>>>>> 0509bdd4d0034982a37bcaad665da08b797558b4
+
 
