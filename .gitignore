@@ -50,3 +50,5 @@ Thumbs.db
 
 # Compiled Cython files
 *.so
+
+block_*
