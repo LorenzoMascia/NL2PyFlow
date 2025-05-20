@@ -45,81 +45,66 @@ function App() {
   }, []);
   
   const generateBlocks = async () => {
-    if (!inputText.trim()) {
-      setError('Enter text to generate blocks');
-      return;
+  if (!inputText.trim()) {
+    setError('Enter text to generate a block');
+    return;
+  }
+
+  setIsLoading(true);
+  setError(null);
+
+  try {
+    // 1. First we parse the blocks
+    const parseResponse = await fetch('http://localhost:5000/api/parse-blocks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: inputText }),
+    });
+
+    const parseData = await parseResponse.json();
+
+    if (!parseData.success || !parseData.blocks || parseData.blocks.length === 0) {
+      throw new Error(parseData.error || 'No block detected in input');
     }
-  
-    setIsLoading(true);
-    setError(null);
-  
-    try {
-      // 1. First we parse the blocks
-      const parseResponse = await fetch('http://localhost:5000/api/parse-blocks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: inputText }),
-      });
-  
-      const parseData = await parseResponse.json();
-  
-      if (!parseData.success) {
-        throw new Error(parseData.error || 'Error in block parsing');
-      }
-  
-      // 2. For each block, we generate the code
-      const blocksWithCode = await Promise.all(
-        parseData.blocks.map(async (block, index) => {
-          const codeResponse = await fetch('http://localhost:5000/api/generate-code', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ block }),
-          });
-  
-          const codeData = await codeResponse.json();
-  
-          if (!codeData.success) {
-            console.error(`Error generating code for block ${block.name}:`, codeData.error);
-            // If the generation fails, we use the default code
-            return {
-              id: block.name,
-              title: block.title,
-              description: block.description,
-              step: index + 1,
-              type: determineBlockType(block.title, block.description),
-              x: 100 + (index % 2) * 300,
-              y: 100 + Math.floor(index / 2) * 200,
-              code: codeData.code || `# Default code for ${block.title}\n\ndef ${block.name}(context: dict) -> dict:\n    # ${block.description}\n    return context`
-            };
-          }
-  
-          return {
-            id: block.name,
-            title: block.title,
-            description: block.description,
-            step: index + 1,
-            type: determineBlockType(block.title, block.description),
-            x: 100 + (index % 2) * 300,
-            y: 100 + Math.floor(index / 2) * 200,
-            code: codeData.code
-          };
-        })
-      );
-  
-      setBlocks(blocksWithCode);
-      createConnections(blocksWithCode);
-  
-    } catch (err) {
-      setError(err.message);
-      console.error('Error in block generation:', err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+    const block = parseData.blocks[0];  // Usa solo il primo blocco
+
+    // For each block, we generate the code
+    const codeResponse = await fetch('http://localhost:5000/api/generate-code', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ block }),
+    });
+
+    const codeData = await codeResponse.json();
+
+    const newBlock = {
+      id: block.name,
+      title: block.title,
+      description: block.description,
+      step: blocks.length + 1,
+      type: determineBlockType(block.title, block.description),
+      x: 100 + ((blocks.length % 2) * 300),
+      y: 100 + Math.floor(blocks.length / 2) * 200,
+      code: codeData.success ? codeData.code : `# Default code for ${block.title}\n\ndef ${block.name}(context: dict) -> dict:\n    # ${block.description}\n    return context`
+    };
+
+    const updatedBlocks = [...blocks, newBlock];
+    setBlocks(updatedBlocks);
+    setInputText(''); // Clean the texteditor
+    createConnections(updatedBlocks);
+
+  } catch (err) {
+    setError(err.message);
+    console.error('Error in block generation:', err);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   // Determines block type based on title/description
   const determineBlockType = (title, description) => {

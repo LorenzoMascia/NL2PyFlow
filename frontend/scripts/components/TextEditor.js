@@ -6,17 +6,12 @@ function TextEditor({ text, onChange, onGenerate, isLoading }) {
         className="text-editor"
         value={text}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={`Write the workflow description here...
-        
+        placeholder={`Describe a single block here...
+
 Example:
-### Block 1: Import Data
+### Import Data
 Loads data from CSV file and prepares the dataframe
-
-### Block 2: Data Cleaning
-Preprocesses data and handles missing values
-
-### Block 3: Train Model
-Trains the machine learning model on the prepared data`}
+`}
       />
       <button 
         className="generate-button" 
