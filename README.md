@@ -1,6 +1,7 @@
 # NL2PyFlow
 
 **Natural Language to Python Flow**
+![Screenshot 2025-04-28 181105](https://github.com/user-attachments/assets/39dcc333-a59f-4c40-8655-894cc174025c)
 
 > A pipeline that converts high level natural language blocks into executable Python functions, chained together with a shared context.
 
@@ -120,6 +121,8 @@ Sum all amounts and store in `context["total_sales"]`.
 
 **Generated Code**:
 
+![Screenshot 2025-04-28 181134](https://github.com/user-attachments/assets/8df9d6a5-bd58-4d56-a096-641ae75e15c3)
+
 ```python
 # block_1.py
 def block_1(context: dict) -> dict:
@@ -184,9 +187,6 @@ Contributions, issues, and feature requests are welcome! Please follow these ste
 
 ## License
 
-<<<<<<< HEAD
-This project is licensed under the [MIT License](LICENSE).
-=======
 This project is licensed under the [Apache License 2.0](LICENSE).
->>>>>>> 0509bdd4d0034982a37bcaad665da08b797558b4
+
 
